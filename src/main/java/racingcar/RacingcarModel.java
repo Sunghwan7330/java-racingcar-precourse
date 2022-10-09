@@ -1,5 +1,6 @@
 package racingcar;
 
+import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
@@ -53,5 +54,18 @@ public class RacingcarModel {
             }
         }
         return res;
+    }
+
+    public boolean inputCarFromString(String carNameList) {
+        String nameArr[] = carNameList.split(",");
+        for (String name : nameArr) {
+            if (name.length() > 5) { //TODO max length 상수 변경 필요
+                return false;
+            }
+        }
+        for (String name : nameArr) {
+            addCar(name);
+        }
+        return true;
     }
 }
