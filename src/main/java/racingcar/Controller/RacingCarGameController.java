@@ -4,15 +4,18 @@ import camp.nextstep.edu.missionutils.Console;
 import racingcar.RacingcarModel;
 
 public class RacingCarGameController {
-    private static final String STR_INPUT_CAR_NAME_MSG = "경주 할 자동차 이름(이름은 쉼표(,) 기준으로 구분)";
-    private static final String STR_INPUT_TRY_CNT_MSG = "시도할 회수";
+    private static final String STR_INPUT_CAR_NAME_MSG = "경주 할 자동차 이름을 입력하세요. (이름은 쉼표(,) 기준으로 구분)";
+    private static final String STR_INPUT_TRY_CNT_MSG = "시도할 회수는 몇회인가요?";
+    private static final String STR_RESULT_MSG = "실행 결과";
 
     public static RacingcarModel racingModel;
+    private static int mGameTryCnt = 0;
 
     public static void run() {
         racingModel = new RacingcarModel();
         inputCarName();
         inputTryCount();
+        processRacingCarGame();
         printVictoryCar();
     }
 
@@ -27,10 +30,15 @@ public class RacingCarGameController {
 
     private static void inputTryCount() {
         System.out.println(STR_INPUT_TRY_CNT_MSG);
-        int rotate = Integer.parseInt(Console.readLine());
-        for (int i = 0; i < rotate; i++) {
+        mGameTryCnt = Integer.parseInt(Console.readLine()); // TODO 입력값 예외처리 필요
+    }
+
+    private static void processRacingCarGame() {
+        System.out.println(STR_RESULT_MSG);
+        for (int i = 0; i < mGameTryCnt; i++) {
             racingModel.runCarOnce();
             racingModel.printCarPosition();
+            System.out.println();
         }
     }
 
