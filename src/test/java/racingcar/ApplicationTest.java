@@ -46,6 +46,21 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 모든_자동차_전부_우승_테스트() {
+        assertRandomNumberInRangeTest(
+                () -> {
+                    run("11,22,33,44,55,66,77,88,99,00", "1");
+                    assertThat(output()).contains(
+                            "11 : -", "22 : -", "33 : -", "44 : -", "55 : -",
+                            "66 : -", "77 : -", "88 : -", "99 : -", "00 : -",
+                            "최종 우승자 : 11, 22, 33, 44, 55, 66, 77, 88, 99, 00");
+                },
+                MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD,
+                MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD, MOVING_FORWARD
+        );
+    }
+
+    @Test
     void 시도_횟수_음수_예외_처리() {
         assertSimpleTest(
                 () -> {
