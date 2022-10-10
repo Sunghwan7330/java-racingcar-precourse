@@ -3,8 +3,12 @@ package racingcar;
 import camp.nextstep.edu.missionutils.Randoms;
 import racingcar.entity.CarEntity;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class RacingcarModel {
     private RacingCarList carList;
+    private int mMaxposition = 0;
 
     private final int MOVE_LEN = 1;
     private final int MAX_STOP_NUM = 3;
@@ -23,7 +27,7 @@ public class RacingcarModel {
     }
 
     private boolean isMove() {
-        int  n = Randoms.pickNumberInRange(0, 9);
+        int n = Randoms.pickNumberInRange(0, 9);
         if (n <= MAX_STOP_NUM) {
             return false;
         }
@@ -33,11 +37,21 @@ public class RacingcarModel {
     public boolean runCarOnce() {
         for (int i = 0; i < getCarLen(); i++) {
             if (isMove()) {
-                carList.getCarEntity(i).moveCar(MOVE_LEN);
+                CarEntity car = carList.getCarEntity(i);
+                car.moveCar(MOVE_LEN);
+                checkMaxPosition(car);
             }
         }
         return true;
     }
+
+    private void checkMaxPosition(CarEntity car) {
+        int carPosition = car.getPosition();
+        if (carPosition > mMaxposition) {
+            mMaxposition = carPosition;
+        }
+    }
+
 
     public void printCarPosition() {
         for (int i = 0; i < getCarLen(); i++) {
@@ -50,17 +64,25 @@ public class RacingcarModel {
     }
 
     public String getForefrontCarName() {
-        // TODO 가독성 향상 리팩터링 필요
-        String res = "";
-        int max = -1;
+        ArrayList<String> forefrontCarList = new ArrayList<>();
+        int carPosition;
         for (int i = 0; i < getCarLen(); i++) {
             CarEntity car = carList.getCarEntity(i);
-            if (max < car.getPosition()) {
-                max = car.getPosition();
-                res = car.getName();
-            } else if (max == car.getPosition()) {
-                res += ", " + car.getName();
+            carPosition = car.getPosition();
+            if (carPosition == mMaxposition)
+                forefrontCarList.add(car.getName());
+        }
+        return convertArraylistToString(forefrontCarList);
+    }
+
+    private String convertArraylistToString(ArrayList<String> list) {
+        String res = "";
+        for (String name : list) {
+            if (res.equals("")) {
+                res += name;
+                continue;
             }
+            res += ", " + name;
         }
         return res;
     }
