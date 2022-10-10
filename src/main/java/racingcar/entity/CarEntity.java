@@ -1,11 +1,13 @@
-package racingcar;
+package racingcar.entity;
 
 public class CarEntity {
-    private String name;
+    //TODO 원시값 포장
+    //private String name;
+    private CarName carName;
     private int position;
 
     public CarEntity(String name) {
-        this.name = name;
+        carName = new CarName(name);
         position = 0;
     }
 
@@ -18,6 +20,6 @@ public class CarEntity {
     }
 
     public String getName() {
-        return this.name;
+        return carName.getName();
     }
 }
