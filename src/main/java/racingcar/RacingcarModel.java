@@ -3,10 +3,10 @@ package racingcar;
 import camp.nextstep.edu.missionutils.Randoms;
 import racingcar.entity.CarEntity;
 
-import java.util.ArrayList;
-
 public class RacingcarModel {
     private RacingCarList carList;
+
+    private final int MOVE_LEN = 1;
 
     public RacingcarModel() {
         carList = new RacingCarList();
@@ -27,7 +27,7 @@ public class RacingcarModel {
             n = Randoms.pickNumberInRange(0, 9);
             if (n >= 4) {
                 CarEntity car = carList.getCarEntity(i);
-                car.setPosition(car.getPosition() + 1);  //TODO 가독성 올릴 수 있을지 검토
+                car.moveCar(MOVE_LEN);
             }
         }
         return true;

@@ -21,4 +21,9 @@ public class CarEntity {
     public String getName() {
         return carName.getName();
     }
+
+    public boolean moveCar(int n) {
+        carPosition.setPosition(carPosition.getPosition() + n);
+        return true;
+    }
 }
