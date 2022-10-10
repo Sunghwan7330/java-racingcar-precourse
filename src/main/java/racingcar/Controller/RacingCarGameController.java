@@ -3,10 +3,14 @@ package racingcar.Controller;
 import camp.nextstep.edu.missionutils.Console;
 import racingcar.RacingcarModel;
 
+import java.sql.PseudoColumnUsage;
+
 public class RacingCarGameController {
     private static final String STR_INPUT_CAR_NAME_MSG = "경주 할 자동차 이름을 입력하세요. (이름은 쉼표(,) 기준으로 구분)";
     private static final String STR_INPUT_TRY_CNT_MSG = "시도할 회수는 몇회인가요?";
     private static final String STR_RESULT_MSG = "실행 결과";
+    private static final String STR_ERROR_INPUT_CRY_COUNT_STRING = "[ERROR] 시도 횟수는 숫자여야 합니다.";
+    private static final String STR_ERROR_INPUT_CRY_COUNT_MINUS = "[ERROR] 시도 횟수는 양수여야 합니다.";
 
     public static RacingcarModel racingModel;
     private static int mGameTryCnt = 0;
@@ -28,8 +32,27 @@ public class RacingCarGameController {
     }
 
     private static void inputTryCount() {
-        System.out.println(STR_INPUT_TRY_CNT_MSG);
-        mGameTryCnt = Integer.parseInt(Console.readLine()); // TODO 입력값 예외처리 필요
+        while (true) {
+            System.out.println(STR_INPUT_TRY_CNT_MSG);
+            try {
+                mGameTryCnt = ConvertInputStrToInt(Console.readLine());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                continue;
+            }
+            break;
+        }
+    }
+
+    private static int ConvertInputStrToInt(String input) {
+        int res;
+        try {
+            res = Integer.parseInt(input);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(STR_ERROR_INPUT_CRY_COUNT_STRING);
+        }
+        if (res < 0) throw new IllegalArgumentException(STR_ERROR_INPUT_CRY_COUNT_MINUS);
+        return res;
     }
 
     private static void processRacingCarGame() {

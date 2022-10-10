@@ -45,6 +45,26 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 시도_횟수_음수_예외_처리() {
+        assertSimpleTest(
+                () -> {
+                    runException("pobi,java", "-1", "1");
+                    assertThat(output()).contains(ERROR_MESSAGE);
+                }
+        );
+    }
+
+    @Test
+    void 시도_횟수_문자_예외_처리() {
+        assertSimpleTest(
+                () -> {
+                    runException("pobi,java", "hello", "1");
+                    assertThat(output()).contains(ERROR_MESSAGE);
+                }
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
