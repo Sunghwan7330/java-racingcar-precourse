@@ -73,6 +73,7 @@ public class RacingcarModel {
                 addCar(name);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
+                carList.clearCarList();
                 return false;
             }
 
