@@ -6,26 +6,27 @@ import racingcar.entity.CarEntity;
 import java.util.ArrayList;
 
 public class RacingcarModel {
-    private ArrayList<CarEntity> carList;   //TODO 일급컬렉션으로 변경 필요
+    private RacingCarList carList;
 
     public RacingcarModel() {
-        carList = new ArrayList<>();
+        carList = new RacingCarList();
     }
 
     public boolean addCar(String carName) {
-        carList.add(new CarEntity(carName));
+        carList.addCar(new CarEntity(carName));
         return true;
     }
 
     public int getCarLen() {
-        return carList.size();
+        return carList.getCarCount();
     }
 
     public boolean runCarOnce() {
         int n;
-        for (CarEntity car : carList) {
+        for (int i = 0; i < getCarLen(); i++) {
             n = Randoms.pickNumberInRange(0, 9);
             if (n >= 4) {
+                CarEntity car = carList.getCarEntity(i);
                 car.setPosition(car.getPosition() + 1);  //TODO 가독성 올릴 수 있을지 검토
             }
         }
@@ -33,9 +34,10 @@ public class RacingcarModel {
     }
 
     public void printCarPosition() {
-        for (CarEntity car : carList) {
+        for (int i = 0; i < getCarLen(); i++) {
+            CarEntity car = carList.getCarEntity(i);
             String dashStr = "";
-            for (int i = 0; i < car.getPosition(); i++)
+            for (int j = 0; j < car.getPosition(); j++)
                 dashStr += "-";
             System.out.println(car.getName() + " : " + dashStr);
         }
@@ -45,7 +47,8 @@ public class RacingcarModel {
         // TODO 가독성 향상 리팩터링 필요
         String res = "";
         int max = -1;
-        for (CarEntity car : carList) {
+        for (int i = 0; i < getCarLen(); i++) {
+            CarEntity car = carList.getCarEntity(i);
             if (max < car.getPosition()) {
                 max = car.getPosition();
                 res = car.getName();
