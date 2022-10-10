@@ -26,6 +26,17 @@ public class CarEitityTest {
     }
 
     @Test
+    public void setCarPositionMinusTest() {
+        String name = "car";
+        int pos = -10;
+        CarEntity car = new CarEntity(name);
+
+        assertThatThrownBy(() -> { car.setPosition(pos); })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 입력된 위치값이 음수입니다.");
+    }
+
+    @Test
     public void setCarNameLengthTest() {
         String name = "car123";
         assertThatThrownBy(() -> { new CarEntity(name); })
@@ -38,4 +49,6 @@ public class CarEitityTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 문자열이 null 입니다.");
     }
+
+
 }
