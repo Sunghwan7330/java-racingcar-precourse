@@ -24,7 +24,6 @@ public class RacingCarGameController {
             System.out.println(STR_INPUT_CAR_NAME_MSG);
             String inputCarStr = Console.readLine();
             if (racingModel.inputCarFromString(inputCarStr)) break;
-            System.out.println("[ERROR] 입력이 잘못되었습니다.");  //TODO 입력 세분화 필요
         }
     }
 

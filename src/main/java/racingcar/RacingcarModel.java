@@ -58,13 +58,15 @@ public class RacingcarModel {
 
     public boolean inputCarFromString(String carNameList) {
         String nameArr[] = carNameList.split(",");
+
         for (String name : nameArr) {
-            if (name.length() > 5) { //TODO max length 상수 변경 필요
+            try {
+                addCar(name);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
                 return false;
             }
-        }
-        for (String name : nameArr) {
-            addCar(name);
+
         }
         return true;
     }
