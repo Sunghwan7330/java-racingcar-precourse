@@ -7,6 +7,7 @@ public class RacingcarModel {
     private RacingCarList carList;
 
     private final int MOVE_LEN = 1;
+    private final int MAX_STOP_NUM = 3;
 
     public RacingcarModel() {
         carList = new RacingCarList();
@@ -21,13 +22,18 @@ public class RacingcarModel {
         return carList.getCarCount();
     }
 
+    private boolean isMove() {
+        int  n = Randoms.pickNumberInRange(0, 9);
+        if (n <= MAX_STOP_NUM) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean runCarOnce() {
-        int n;
         for (int i = 0; i < getCarLen(); i++) {
-            n = Randoms.pickNumberInRange(0, 9);
-            if (n >= 4) {
-                CarEntity car = carList.getCarEntity(i);
-                car.moveCar(MOVE_LEN);
+            if (isMove()) {
+                carList.getCarEntity(i).moveCar(MOVE_LEN);
             }
         }
         return true;
