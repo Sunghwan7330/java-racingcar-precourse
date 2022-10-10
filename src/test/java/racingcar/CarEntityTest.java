@@ -6,7 +6,7 @@ import racingcar.entity.CarEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class CarEitityTest {
+public class CarEntityTest {
 
     @Test
     public void newCarEntityTest() {
