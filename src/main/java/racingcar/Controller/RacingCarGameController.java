@@ -1,9 +1,7 @@
 package racingcar.Controller;
 
 import camp.nextstep.edu.missionutils.Console;
-import racingcar.RacingcarModel;
-
-import java.sql.PseudoColumnUsage;
+import racingcar.model.RacingcarModel;
 
 public class RacingCarGameController {
     private static final String STR_INPUT_CAR_NAME_MSG = "경주 할 자동차 이름을 입력하세요. (이름은 쉼표(,) 기준으로 구분)";

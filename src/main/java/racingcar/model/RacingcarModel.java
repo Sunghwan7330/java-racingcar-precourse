@@ -1,9 +1,8 @@
-package racingcar;
+package racingcar.model;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import racingcar.entity.CarEntity;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class RacingcarModel {
